@@ -2,9 +2,6 @@ import 'package:dependencies/dependencies.dart';
 import 'package:dependencies/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
-import 'cubit/home_cubit.dart';
-import 'presenter.dart';
-
 ///
 ///
 ///
@@ -25,7 +22,16 @@ class _HomePageState extends State<HomePage> {
       body: BlocConsumer<HomeCubit, HomeState>(
           bloc: cubit,
           listenWhen: (previous, current) => previous != current,
-          listener: (_, state) {},
+          listener: (_, state) {
+            // switch (state) {
+            //   case LoggedOutState():
+            //     // Modu
+            //     break;
+            //   case SuccessState():
+            //     _showMessage('Sucesso!!!\nIr para a home');
+            //   default:
+            // }
+          },
           buildWhen: (previous, current) => previous != current,
           builder: (_, state) {
             return switch (state) {

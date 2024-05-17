@@ -38,7 +38,8 @@ class _LoginPageState extends State<LoginPage> {
                 _showMessage(state.message);
                 break;
               case SuccessState():
-                _showMessage('Sucesso!!!\nIr para a home');
+                Modular.get<HomeCubit>().logged();
+                Modular.to.pushReplacementNamed('/home/');
               default:
             }
           },

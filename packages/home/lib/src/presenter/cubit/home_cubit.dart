@@ -7,7 +7,9 @@ part 'home_state.dart';
 ///
 class HomeCubit extends Cubit<HomeState> {
   ///
-  HomeCubit() : super(LoggedOutState());
+  HomeCubit() : super(LoggedOutState()) {
+    print('>>> created');
+  }
 
   ///
   void logged() => emit(LoggedState());

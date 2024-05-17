@@ -18,6 +18,7 @@ class AppModule extends Module {
         ModuleRoute(
           '/home',
           module: HomeModule(),
+          guards: [HomeGuard()],
         ),
         ModuleRoute(
           '/login',

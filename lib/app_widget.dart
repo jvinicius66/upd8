@@ -13,7 +13,7 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
-    Modular.setInitialRoute('/login/');
+    Modular.setInitialRoute('/home/');
 
     return MaterialApp.router(
       theme: ThemeData(useMaterial3: false),
