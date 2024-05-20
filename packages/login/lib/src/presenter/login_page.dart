@@ -1,5 +1,6 @@
 import 'package:dependencies/dependencies.dart';
 import 'package:dependencies/extensions/extensions.dart';
+import 'package:dependencies/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'cubit/login_cubit.dart';
@@ -38,8 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                 _showMessage(state.message);
                 break;
               case SuccessState():
-                Modular.get<HomeCubit>().logged();
-                Modular.to.pushReplacementNamed('/home/');
+                _loginAndRedirectToHome();
               default:
             }
           },
@@ -70,6 +70,11 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.red[700],
         ),
       );
+
+  void _loginAndRedirectToHome() {
+    Modular.get<HomeCubit>().logged();
+    Modular.to.pushReplacementNamed('/home/');
+  }
 }
 
 class _Title extends Text {
@@ -108,7 +113,7 @@ class _Body extends SingleChildScrollView {
                   controller: passController,
                 ),
                 30.spaceVertical,
-                _EnterButton(
+                ButtonWidget(
                   onPressed: onLogin,
                   text: 'ENTRAR',
                 ),
@@ -140,14 +145,5 @@ class _LoginInput extends TextFormField {
             helperText: helperText,
             counterText: '',
           ),
-        );
-}
-
-class _EnterButton extends ElevatedButton {
-  _EnterButton({
-    required super.onPressed,
-    required String text,
-  }) : super(
-          child: Text(text),
         );
 }
