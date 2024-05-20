@@ -33,3 +33,14 @@ class UnknowException extends UsersException {
     super.stackTrace,
   });
 }
+
+///
+///
+///
+class MapperException extends UsersException {
+  ///
+  MapperException({
+    required super.message,
+    super.stackTrace,
+  });
+}

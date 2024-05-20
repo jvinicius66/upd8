@@ -22,6 +22,8 @@ class UsersRepository implements IUsersRepository {
       return Success(result.map((e) => e.toEntity).toList());
     } on UnknowException catch (e) {
       return Failure(UnknowFailure(message: e.message));
+    } on MapperException catch (e) {
+      return Failure(MapperFailure(message: e.message));
     }
   }
 }

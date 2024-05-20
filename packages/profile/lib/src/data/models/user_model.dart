@@ -1,4 +1,5 @@
 import '../../domain/entities/entities.dart';
+import '../exceptions/exceptions.dart';
 
 ///
 ///
@@ -28,11 +29,22 @@ class UserModel {
       );
 
   /// Factory from map/json
-  factory UserModel.fromMap(Map<String, dynamic> map) => UserModel(
-        id: map['id'],
-        name: map['name'],
-        email: map['email'],
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    if (map
+        case {
+          'id': final int id,
+          'name': final String name,
+          'email': final String email
+        }) {
+      return UserModel(
+        id: id,
+        name: name,
+        email: email,
       );
+    } else {
+      throw MapperException(message: 'Data conversion error');
+    }
+  }
 
   /// parse list to List<UserModel> if list is not empty
   static List<UserModel> fromMapList(List? list) {

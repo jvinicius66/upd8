@@ -20,3 +20,13 @@ class UnknowFailure extends UsersFailure {
     required super.message,
   });
 }
+
+///
+///
+///
+class MapperFailure extends UsersFailure {
+  ///
+  MapperFailure({
+    required super.message,
+  });
+}
