@@ -2,6 +2,7 @@ import 'package:dependencies/dependencies.dart';
 import 'package:dependencies/extensions/extensions.dart';
 import 'package:dependencies/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 ///
 ///
@@ -61,19 +62,12 @@ class _LoggedContent extends Container {
   _LoggedContent({
     required VoidCallback onLogout,
   }) : super(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ButtonWidget(onPressed: onLogout, text: 'Sair'),
-                ...List.generate(
-                  20,
-                  (index) => ListTile(
-                    title: Text('Usuário $index'),
-                    subtitle: Text('email $index'),
-                  ),
-                ),
-              ],
-            ),
+          child: Column(
+            children: [
+              ButtonWidget(onPressed: () {}, text: 'Editar Perfil'),
+              ButtonWidget(onPressed: () {}, text: 'Visualizar Perfil'),
+              ButtonWidget(onPressed: onLogout, text: 'Sair'),
+            ],
           ),
         );
 }
