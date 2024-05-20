@@ -2,7 +2,8 @@ import 'package:dependencies/dependencies.dart';
 import 'package:dependencies/extensions/extensions.dart';
 import 'package:dependencies/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import 'widgets/widgets.dart';
 
 ///
 ///
@@ -21,6 +22,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const _Title(),
+      ),
       body: SafeArea(
         child: BlocConsumer<HomeCubit, HomeState>(
             bloc: cubit,
@@ -37,18 +41,26 @@ class _HomePageState extends State<HomePage> {
             builder: (_, state) {
               return switch (state) {
                 LoggedState() => _LoggedContent(
+                    onProfile: _redirectToProfile,
                     onLogout: _onLogOut,
                   ).addCenter(),
                 LoggedOutState() => _AccessDeniedContent(),
               };
             }),
       ),
+      endDrawer: const HomeDrawer(),
     );
   }
 
   void _redirectToLogin() => Modular.to.pushReplacementNamed('/login/');
 
   void _onLogOut() => cubit.loggedOut();
+
+  void _redirectToProfile() => Modular.to.pushNamed('/profile/');
+}
+
+class _Title extends Text {
+  const _Title() : super('Home');
 }
 
 class _AccessDeniedContent extends Container {
@@ -61,11 +73,12 @@ class _AccessDeniedContent extends Container {
 class _LoggedContent extends Container {
   _LoggedContent({
     required VoidCallback onLogout,
+    required VoidCallback onProfile,
   }) : super(
           child: Column(
             children: [
               ButtonWidget(onPressed: () {}, text: 'Editar Perfil'),
-              ButtonWidget(onPressed: () {}, text: 'Visualizar Perfil'),
+              ButtonWidget(onPressed: onProfile, text: 'Visualizar Perfil'),
               ButtonWidget(onPressed: onLogout, text: 'Sair'),
             ],
           ),

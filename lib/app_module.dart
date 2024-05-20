@@ -1,3 +1,4 @@
+import 'package:dependencies/adapters/http/http.dart';
 import 'package:dependencies/dependencies.dart';
 
 ///
@@ -8,10 +9,15 @@ class AppModule extends Module {
   List<Module> get imports => [
         LoginModule(),
         HomeModule(),
+        ProfileModule(),
       ];
 
   @override
-  List<Bind<Object>> get binds => [];
+  List<Bind<Object>> get binds => [
+        Bind.lazySingleton<HttpAdapter>(
+          (i) => HttpClient('https://jsonplaceholder.typicode.com/'),
+        ),
+      ];
 
   @override
   List<ModularRoute> get routes => [
@@ -23,6 +29,10 @@ class AppModule extends Module {
         ModuleRoute(
           '/login',
           module: LoginModule(),
+        ),
+        ModuleRoute(
+          '/profile',
+          module: ProfileModule(),
         ),
       ];
 }
